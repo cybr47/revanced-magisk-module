@@ -1,0 +1,55 @@
+name: Build Gboard Advanced Voice APK
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "config-gboard.toml"
+      - ".github/workflows/gboard.yml"
+
+jobs:
+  build:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/setup-java@v5
+        with:
+          distribution: "zulu"
+          java-version: "21"
+
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          submodules: true
+
+      - name: Build Gboard Advanced Voice APK
+        run: ./build.sh config-gboard.toml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: $GITHUB_REPOSITORY
+          NEXT_VER_CODE: ${{ github.run_number }}
+
+      - name: Show build output
+        run: |
+          cat build.md
+          echo "Generated files:"
+          ls -lah build/
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gboard-advanced-voice-apk
+          path: build/*.apk
+          if-no-files-found: error
+
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: gboard-${{ github.run_number }}
+        run: |
+          gh release create "$TAG" build/*.apk \
+            --title "Gboard Advanced Voice ${{ github.run_number }}" \
+            --notes-file build.md
