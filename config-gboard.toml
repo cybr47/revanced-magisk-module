@@ -2,16 +2,17 @@ parallel-jobs = 1
 
 # Gboard-only build using jasonwu1994/Gboard-patches.
 # Output: normal APK, original package name, ARMv8 / arm64-v8a.
-# Only the Advanced Voice Typing patch is selected.
+# Apply the full default compatible patch set, including Advanced Voice Typing,
+# while explicitly excluding Package Rename so the stock package name is kept.
 
 [Gboard-Advanced-Voice]
-app-name = "Gboard Advanced Voice"
+app-name = "Gboard Patched"
 patches-source = "jasonwu1994/Gboard-patches"
 cli-source = "MorpheApp/morphe-cli"
 rv-brand = "Gboard Patches"
 build-mode = "apk"
 arch = "arm64-v8a"
 version = "18.0.3.954559732-release-arm64-v8a"
-exclusive-patches = true
-included-patches = "'Advanced Voice Typing'"
+exclusive-patches = false
+excluded-patches = "'Package Rename'"
 apkmirror-dlurl = "https://www.apkmirror.com/apk/google-inc/gboard-the-google-keyboard/"
