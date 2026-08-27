@@ -13,5 +13,4 @@ version = "9.33.53"
 
 patcher-args = "--force"
 
-apkmirror-dlurl = "https://www.apkmirror.com/apk/google-inc/youtube-music"
-uptodown-dlurl = "https://youtube-music.en.uptodown.com/android"
+direct-dlurl = "https://github.com/cybr47/revanced-magisk-module/releases/download/cherry/com.google.android.apps.youtube.music-9.33.53-arm64-v8a.apk"
