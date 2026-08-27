@@ -1,0 +1,47 @@
+name: Build YouTube Music 9.33.53 Experimental
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq zip
+
+      - name: Build experimental 9.33.53 module
+        run: |
+          chmod +x build.sh
+          ./build.sh config-ytmusic-93353.toml
+
+      - name: Show build output
+        if: always()
+        run: |
+          find build -maxdepth 3 -type f -print 2>/dev/null || true
+          cat build.md 2>/dev/null || true
+
+      - name: Upload build
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-music-morphe-9.33.53-arm64
+          path: |
+            build/*.zip
+            build/**/*.zip
+          if-no-files-found: error
