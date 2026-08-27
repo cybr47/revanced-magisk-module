@@ -9,8 +9,8 @@ rv-brand = "Gboard Patches"
 
 build-mode = "apk"
 arch = "arm64-v8a"
-version = "18.0.3.954559732-release-arm64-v8a"
+version = "18.0.3.954559732"
 
 excluded-patches = "'Package Rename'"
 
-direct-dlurl = "https://github.com/cybr47/revanced-magisk-module/releases/download/stock/com.google.android.inputmethod.latin_18.0.3.954559732-release-arm64-v8a-175940518_minAPI26.arm64-v8a.nodpi._apkmirror.com.apk"
+direct-dlurl = "https://github.com/cybr47/revanced-magisk-module/releases/download/stock/com.google.android.inputmethod.latin-18.0.3.954559732-arm64-v8a.apk"
