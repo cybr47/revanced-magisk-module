@@ -1,0 +1,17 @@
+parallel-jobs = 1
+enable-module-update = true
+
+[Music-Morphe-93353]
+app-name = "YouTube Music Morphe 9.33.53"
+patches-source = "MorpheApp/morphe-patches"
+cli-source = "MorpheApp/morphe-cli"
+rv-brand = "Morphe"
+
+build-mode = "module"
+arch = "arm64-v8a"
+version = "9.33.53"
+
+patcher-args = "--force"
+
+apkmirror-dlurl = "https://www.apkmirror.com/apk/google-inc/youtube-music"
+uptodown-dlurl = "https://youtube-music.en.uptodown.com/android"
