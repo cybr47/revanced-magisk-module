@@ -1,5 +1,12 @@
-name: Build Modules
+name: Build YouTube Music Module
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - config.toml
+      - .github/workflows/build.yml
+
   workflow_call:
     inputs:
       from_ci:
@@ -44,7 +51,7 @@ jobs:
           if [ -z "$TAG" ]; then TAG=0; fi
           echo "NEXT_VER_CODE=$((TAG + 1))" >> $GITHUB_OUTPUT
 
-      - name: Build modules/APKs
+      - name: Build YouTube Music module
         run: if [ -f "config.json" ]; then ./build.sh config.json; else ./build.sh config.toml; fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
